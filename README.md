@@ -47,15 +47,23 @@ nohup megahit -1 $(<R1.csv) -2 $(<R2.csv) -t 96 -o Assembly --presets meta > meg
 
 We can have a look at how good the assembly was:
 ```
-contig-stats.pl < Coassembly/final.contigs.fa
+contig-stats.pl < Assembly/final.contigs.fa
 ```
-Not great, but expected given the low read number.
+Output should be similar too:
+```
+sequence #: 1316028	total length: 964326614	max length: 318273	N50: 1088	N90: 299
+```
+Not bad, a N50 of 1088bp. All scripts are available in this repo in the scripts dir. They will 
+need to be added to your path though.
 
-We will now perform CONCOCT binning of these contigs. As explained in [Alneberg et al.](http://www.nature.com/nmeth/journal/v11/n11/full/nmeth.3103.html) 
-there are good reasons to cut up contigs prior to binning. We will use a script from CONCOCT to do this. For convenience we 
-have created an environmental variables that points to the CONCOCT install directory:
+We will now perform CONCOCT binning of these contigs. As explained in 
+[Alneberg et al.](http://www.nature.com/nmeth/journal/v11/n11/full/nmeth.3103.html) 
+there are good reasons to cut up contigs prior to binning. We will use a script from 
+CONCOCT to do this. For convenience we 
+will create an environmental variables that points to the CONCOCT install directory 
+change as appropriate:
 ```
-echo $CONCOCT
+export CONCOCT=~/Installed/CONCOCT
 ```
 
 ###Mapping
@@ -64,10 +72,11 @@ First we cut up contigs and place in new dir:
 
 ```bash
 mkdir contigs
-python $CONCOCT/scripts/cut_up_fasta.py -c 10000 -o 0 -m Coassembly/final.contigs.fa > contigs/final_contigs_c10K.fa
+python $CONCOCT/scripts/cut_up_fasta.py -c 10000 -o 0 -m Assembly/final.contigs.fa > contigs/final_contigs_c10K.fa
 ```
 
-Having cut-up the contigs the next step is to map all the reads from each sample back onto them. First index the contigs with bwa:
+Having cut-up the contigs the next step is to map all the reads from each sample back onto them. 
+First index the contigs with bwa:
 
 ```bash
 cd contigs
@@ -80,7 +89,16 @@ Then perform the actual mapping you may want to put this in a shell script:
 ```bash
 mkdir Map
 
-for file in MetaTutorial/{C,H}*R12.fasta
+for file in Reads/*R1.fasta
+do
+    stub=${file%_R1.fasta}
+    stub=${stub#Reads\/}
+    
+    bwa mem -t 64 contigs/final_contigs_c10K.fa $file Reads/${stub}_R2.fasta > Map/${stub}.sam
+    echo $stub
+done
+
+for file in Reads/{C,H}*R12.fasta
 do 
    
    stub=${file%_R12.fasta}
