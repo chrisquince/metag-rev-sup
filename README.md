@@ -84,7 +84,8 @@ bwa index final_contigs_c10K.fa
 cd ..
 ```
 
-Then perform the actual mapping you may want to put this in a shell script:
+Then perform the actual mapping you may want to put this in a shell script and adjust the number of threads 
+according to your resources:
 
 ```bash
 mkdir Map
@@ -97,14 +98,25 @@ do
     bwa mem -t 64 contigs/final_contigs_c10K.fa $file Reads/${stub}_R2.fasta > Map/${stub}.sam
     echo $stub
 done
+```
 
-for file in Reads/{C,H}*R12.fasta
-do 
-   
-   stub=${file%_R12.fasta}
-   stub=${stub#MetaTutorial\/}
-   echo $stub
+Then we need to calculate our contig lengths.
 
-   bwa mem -t 8 contigs/final_contigs_c10K.fa $file > Map/${stub}.sam
+```bash
+python ~/bin/Lengths.py -i contigs/final_contigs_c10K.fa > contigs/final_contigs_c10K.len
+```
+
+Then we calculate coverages for each contig in each sample:
+
+```bash
+for file in Map/*.sam
+do
+    stub=${file%.sam}
+    stub2=${stub#Map\/}
+    echo $stub	
+    samtools view -h -b -S $file > ${stub}.bam 
+    samtools view -b -F 4 ${stub}.bam > ${stub}.mapped.bam
+    samtools sort ${stub}.mapped.bam ${stub}.mapped.sorted
+    bedtools genomecov -ibam ${stub}.mapped.sorted.bam -g contigs/final_contigs_c10K.len > ${stub}_cov.txt
 done
 ```
