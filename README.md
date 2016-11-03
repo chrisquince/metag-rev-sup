@@ -116,7 +116,27 @@ do
     echo $stub	
     samtools view -h -b -S $file > ${stub}.bam 
     samtools view -b -F 4 ${stub}.bam > ${stub}.mapped.bam
-    samtools sort ${stub}.mapped.bam ${stub}.mapped.sorted
-    bedtools genomecov -ibam ${stub}.mapped.sorted.bam -g contigs/final_contigs_c10K.len > ${stub}_cov.txt
+    samtools sort ${stub}.mapped.bam -o ${stub}.mapped.sorted
+    bedtools genomecov -ibam ${stub}.mapped.sorted -g contigs/final_contigs_c10K.len > ${stub}_cov.txt
 done
+```
+
+and use awk to aggregate the output of bedtools:
+
+```bash
+for i in Map/*_cov.txt 
+do 
+   echo $i
+   stub=${i%_cov.txt}
+   stub=${stub#Map\/}
+   echo $stub
+   awk -F"\t" '{l[$1]=l[$1]+($2 *$3);r[$1]=$4} END {for (i in l){print i","(l[i]/r[i])}}' $i > Map/${stub}_cov.csv
+done
+```
+
+and finally run the following perl script to collate the coverages across samples, where we have simply adjusted the format 
+from csv to tsv to be compatible with CONCOCT:
+
+```bash
+Collate.pl Map | tr "," "\t" > Coverage.tsv
 ```
