@@ -140,3 +140,26 @@ from csv to tsv to be compatible with CONCOCT:
 ```bash
 Collate.pl Map | tr "," "\t" > Coverage.tsv
 ```
+
+
+We will only run concoct for some standard settings here. The only one we 
+vary is the cluster number which should be at least twice the number of genomes in your 
+co-assembly (see discussion below of how to estimate this). In this case we know it is 
+around 20 so run concoct with 40 as the maximum number of cluster `-c 40`:
+
+```
+mkdir Concoct
+cd Concoct
+mv ../Coverage.tsv .
+concoct --coverage_file Coverage.tsv --composition_file ../contigs/final_contigs_c10K.fa 
+cd ..
+```
+
+#Annotate genes on contigs
+
+```
+mkdir Annotate
+cd Annotate/
+LengthFilter.pl ../contigs/final_contigs_c10K.fa 1000 > final_contigs_gt1000_c10K.fa
+prodigal -i final_contigs_gt1000_c10K.fa -a final_contigs_gt1000_c10K.faa -d final_contigs_gt1000_c10K.fna  -f gff -p meta -o final_contigs_gt1000_c10K.gff
+```
