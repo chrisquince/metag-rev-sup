@@ -142,10 +142,9 @@ Collate.pl Map | tr "," "\t" > Coverage.tsv
 ```
 
 
-We will only run concoct for some standard settings here. The only one we 
+We will only run concoct with default settings here. The only one we 
 vary is the cluster number which should be at least twice the number of genomes in your 
-co-assembly (see discussion below of how to estimate this). In this case we know it is 
-around 20 so run concoct with 40 as the maximum number of cluster `-c 40`:
+co-assembly. 
 
 ```
 mkdir Concoct
@@ -157,9 +156,41 @@ cd ..
 
 #Annotate genes on contigs
 
+
+First we call genes on the contigs using prodigal.
+
 ```
 mkdir Annotate
 cd Annotate/
 LengthFilter.pl ../contigs/final_contigs_c10K.fa 1000 > final_contigs_gt1000_c10K.fa
 prodigal -i final_contigs_gt1000_c10K.fa -a final_contigs_gt1000_c10K.faa -d final_contigs_gt1000_c10K.fna  -f gff -p meta -o final_contigs_gt1000_c10K.gff
 ```
+
+Then we assign COGs with RPSBlast. The script in the CONCOCT distro for doing this requires 
+an environment variable pointing to the COG database to be set. We also set another variable 
+pointing to the CONCOCT scripts for convenience:
+
+```
+export COGSDB_DIR=/home/opt/rpsblast_db
+export CONCOCT=/home/chris/Installed/CONCOCT
+```
+
+Then we run this on 32 cores:
+```
+$CONCOCT/scripts/RPSBLAST.sh -f final_contigs_gt1000_c10K.faa -p -c 32 -r 1
+```
+
+This allows us to evaluate clusters based on single-copy core genes:
+Then generate SCG frequencies in clusters:
+```
+$CONCOCT/scripts/COG_table.py -b final_contigs_gt1000_c10K.out -m $CONCOCT/scgs/scg_cogs_min0.97_max1.03_unique_genera.txt -c ../Concoct/clustering_gt1000.csv --cdd_cog_file $CONCOCT/scgs/cdd_to_cog.tsv > clustering_gt1000_scg.tsv
+```
+
+and a pdf:
+```
+$CONCOCT/scripts/COGPlot.R -s clustering_gt1000_scg.tsv -o clustering_gt1000_scg.pdf
+```
+
+54 clusters 75% pure and complete
+
+![Single copy core gene plot](./Figures/clustering_gt1000_scg.pdf)
