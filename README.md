@@ -5,6 +5,20 @@
 <a name="assembly"/>
 ##Assembly based metagenomics analysis
 
+This analysis regenerates the results in the left panel of Figure 3. The results will not 
+be identical due to some differences in software principally the switch from idba_ud to megahit
+for the assembly step. This was changed for reasons of efficiency.
+
+We took twenty samples from healthy control children and those with Crohn's disease from a 
+larger study looking at the effect of a treatment (EEN) on the Crohn's microbiota 
+[Quince et al. 2015] (https://www.ncbi.nlm.nih.gov/pubmed/26526081).
+The sequences comprised a combination of MiSeq 2X250bp and HiSeq 2X150bp paired end reads.
+
+Reads were trimmed and filtered with sickle to remove sequencing adaptors and 
+regions with an average quality of < 20. Human DNA was then removed using DeconSeq. 
+The minimum and maximum read numbers following trimming and filtering 
+were 2,456,000 and 14,720,000 respectively with a median of 7,797,000.
+
 We are now going to perform a basic assembly based metagenomics analysis of these same samples. This will involve 
 a collection of different software programs:
 
