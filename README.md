@@ -51,7 +51,7 @@ cd ~/Example
 
 Begin by downloading the reads:
 ```
-wget ****
+wget http://metagexample.s3.climb.ac.uk/Reads.tar.gz
 tar -xvzf Reads.tar.gz
 ```
 We will then perform a co-assembly of these samples using megahit. First we 
