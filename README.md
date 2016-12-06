@@ -43,6 +43,12 @@ a collection of different software programs:
 
 ###Co-assembly
 
+Create an example directory to work in:
+```
+mkdir ~/Example
+cd ~/Example
+```
+
 Begin by downloading the reads:
 ```
 wget ****
