@@ -175,6 +175,17 @@ concoct --coverage_file Coverage.tsv --composition_file ../contigs/final_contigs
 cd ..
 ```
 
+The output of concoct is principally an assignment of each contig to a bin as a comma separated file, 
+clustering_gt1000.csv, with a simple format of contig,assignment:
+```
+tail clustering_gt1000.csv
+```
+We can count the total number of bins as follows:
+```
+cut -d"," -f2 clustering_gt1000.csv | sort | uniq -c | wc
+```
+We should give something like 264.
+
 #Annotate genes on contigs
 
 
@@ -201,8 +212,12 @@ Then we run this on 32 cores:
 $CONCOCT/scripts/RPSBLAST.sh -f final_contigs_gt1000_c10K.faa -p -c 32 -r 1
 ```
 
-This allows us to evaluate clusters based on single-copy core genes:
-Then generate SCG frequencies in clusters:
+This script performs an RPS-BLAST of translated 
+sequences against the NCBI COG database using an e-value cut-off of 1.0e-3. 
+Each query was assigned to the top RPS-BLAST and only if it covered at least 50% of the target sequence. 
+The script COG_table.py was then used to generate a table of counts for 36 COGs that we 
+previously identified as being found in all bacterial genome with a single copy. We refer to these 
+COGs as single-copy core genes (SCGs): 
 ```
 $CONCOCT/scripts/COG_table.py -b final_contigs_gt1000_c10K.out -m $CONCOCT/scgs/scg_cogs_min0.97_max1.03_unique_genera.txt -c ../Concoct/clustering_gt1000.csv --cdd_cog_file $CONCOCT/scgs/cdd_to_cog.tsv > clustering_gt1000_scg.tsv
 ```
@@ -211,7 +226,9 @@ and a pdf:
 ```
 $CONCOCT/scripts/COGPlot.R -s clustering_gt1000_scg.tsv -o clustering_gt1000_scg.pdf
 ```
-
-54 clusters 75% pure and complete
+This enables us to estimate the completeness of each CONCOCT cluster, in total we found 88 clusters which 
+were at least 75% complete and pure in this data set. We will consider these clusters to be 
+partially complete metagenome assembled genomes or MAGs. In total we obtained 54 clusters 
+that were 75% pure and complete.
 
 ![Single copy core gene plot](./Figures/clustering_gt1000_scg.pdf)
