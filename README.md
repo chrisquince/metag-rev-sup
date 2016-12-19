@@ -232,3 +232,58 @@ partially complete metagenome assembled genomes or MAGs. In total we obtained 54
 that were 75% pure and complete.
 
 ![Single copy core gene plot](./Figures/clustering_gt1000_scg.pdf)
+
+### Taxonomic classification of contigs
+
+There are many ways to taxonomically classify assembled sequence. We suggest a gene based approach. 
+The first step is 
+to call genes on all contigs that are greater than 1,000 bp. Shorter sequences are unlikely to contain complete 
+coding sequences. The following requires that you have a Diamond formatted version of the NCBI NR on your system. 
+To ensure compatibility with the files below this can be downloaded by:
+
+```
+wget http://nrdatabase.s3.climb.ac.uk/nr.dmnd
+```
+
+Set the environment variable NR_DMD to point to the location of this file:
+```
+export NR_DMD=$HOME/native/Databases/nr/FASTA/nr.dmnd
+```
+
+Return to the example directory and make a new directory...
+```
+cd ..
+mkdir AssignTaxa
+cd AssignTaxa
+cp ../Annotate/final_contigs_gt1000_c10K.faa .
+diamond blastp -p 32 -d $NR_DMD -q final_contigs_gt1000_c10K.faa -a final_contigs_gt1000_c10K > d.out
+diamond view -a final_contigs_gt1000_c10K.daa -o final_contigs_gt1000_c10K_nr.m8
+```
+To classify the contigs we need two files a gid to taxid mapping file and a mapping of taxaid to full lineage:
+
+1. gi_taxid_prot.dmp
+
+2. all_taxa_lineage_notnone.tsv
+
+These can also be downloaded from the Dropbox:
+``` 
+wget https://www.dropbox.com/s/x4s50f813ok4tqt/gi_taxid_prot.dmp.gz
+wget https://www.dropbox.com/s/honc1j5g7wli3zv/all_taxa_lineage_notnone.tsv.gz
+```
+
+To perform the classification we use the ClassifyContigNR.py script which is included in this repo.
+The path to these files are default in the ClassifyContigNR.py script as the variables:
+```
+DEF_DMP_FILE = "/home/chris/native/Databases/nr/FASTA/gi_taxid_prot.dmp"
+
+DEF_LINE_FILE = "/home/chris/native/Databases/nr/FASTA/all_taxa_lineage_notnone.tsv"
+```
+
+We calculate the gene length in amino acids before running this.
+Then we can assign the contigs and genes called on them:
+```
+python Lengths.py -i final_contigs_gt1000_c10K.faa > final_contigs_gt1000_c10K.len
+python ClassifyContigNR.py final_contigs_gt1000_c10K_nr.m8 final_contigs_gt1000_c10K.len -o final_contigs_gt1000_c10K_nr -l /mypath/all_taxa_lineage_notnone.tsv -g /mypath/gi_taxid_prot.dmp
+```
+
+
