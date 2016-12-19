@@ -186,11 +186,9 @@ cut -d"," -f2 clustering_gt1000.csv | sort | uniq -c | wc
 ```
 We should give something like 264.
 
-#Annotate genes on contigs
-
+###Annotate genes on contigs
 
 First we call genes on the contigs using prodigal.
-
 ```
 mkdir Annotate
 cd Annotate/
@@ -201,7 +199,6 @@ prodigal -i final_contigs_gt1000_c10K.fa -a final_contigs_gt1000_c10K.faa -d fin
 Then we assign COGs with RPSBlast. The script in the CONCOCT distro for doing this requires 
 an environment variable pointing to the COG database to be set. We also set another variable 
 pointing to the CONCOCT scripts for convenience:
-
 ```
 export COGSDB_DIR=/home/opt/rpsblast_db
 export CONCOCT=/home/chris/Installed/CONCOCT
@@ -215,6 +212,9 @@ $CONCOCT/scripts/RPSBLAST.sh -f final_contigs_gt1000_c10K.faa -p -c 32 -r 1
 This script performs an RPS-BLAST of translated 
 sequences against the NCBI COG database using an e-value cut-off of 1.0e-3. 
 Each query was assigned to the top RPS-BLAST and only if it covered at least 50% of the target sequence. 
+
+###Evaluate clustering based on SCGs
+
 The script COG_table.py was then used to generate a table of counts for 36 COGs that we 
 previously identified as being found in all bacterial genome with a single copy. We refer to these 
 COGs as single-copy core genes (SCGs): 
