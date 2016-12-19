@@ -12,7 +12,8 @@ for the assembly step. This was changed for reasons of efficiency.
 We took twenty samples from healthy control children and those with Crohn's disease from a 
 larger study looking at the effect of a treatment (EEN) on the Crohn's microbiota 
 [Quince et al. 2015] (https://www.ncbi.nlm.nih.gov/pubmed/26526081).
-The sequences comprised a combination of MiSeq 2X250bp and HiSeq 2X150bp paired end reads.
+The sequences comprised a combination of MiSeq 2X250bp and HiSeq 2X150bp paired end reads. The 
+sequences used in this tutorial can be downloaded [here](https://metagexample.s3.climb.ac.uk/Reads.tar.gz).
 
 Reads were trimmed and filtered with sickle to remove sequencing adaptors and 
 regions with an average quality of < 20. Human DNA was then removed using DeconSeq. 
@@ -51,7 +52,7 @@ cd ~/Example
 
 Begin by downloading the reads:
 ```
-wget http://metagexample.s3.climb.ac.uk/Reads.tar.gz
+wget https://metagexample.s3.climb.ac.uk/Reads.tar.gz
 tar -xvzf Reads.tar.gz
 ```
 We will then perform a co-assembly of these samples using megahit. First we 
