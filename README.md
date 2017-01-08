@@ -286,4 +286,27 @@ python Lengths.py -i final_contigs_gt1000_c10K.faa > final_contigs_gt1000_c10K.l
 python ClassifyContigNR.py final_contigs_gt1000_c10K_nr.m8 final_contigs_gt1000_c10K.len -o final_contigs_gt1000_c10K_nr -l /mypath/all_taxa_lineage_notnone.tsv -g /mypath/gi_taxid_prot.dmp
 ```
 
+### Clusters with differential abundance between Crohn's and healthy children
+
+To explore differences in community composition between the CD and control children, we calculated per sample 
+normalised abundances for each cluster. Move into the Concoct directly and using a script from the CONCOCT repo:
+
+```
+cd ../Concoct
+tr "\t" "," < Coverage.tsv > Coverage.csv
+$CONCOCT/scripts/ClusterMeanCov.pl --cfile=clustering_gt1000.csv --covfile=Coverage.csv --ffile=../final.contigs_c10K.fa > cluster_freq.csv 
+```
+
+
+An NMDS plot of these abundances are shown in Figure \ref{fig:NMDS}. From this it is apparent 
+that there are significant differences in community composition between the two types. In fact 10.8\% of the 
+variance in community composition was explained by type (perm. ANOVA, p-value $<$ 0.001). There was also a higher variance in community 
+composition in the CD children (Average distance to median: CD 0.5510 vs. Healthy 0.4033 p-value = $8.317e-05$). To determine those clusters 
+responsible for this difference we performed Kruskal-Wallis non-parametric ANOVA on the log-transformed abundances in each group. 
+Benjamini-hochberg was used to correct for multiple comparisons. This revealed 89 clusters with a 
+q-value $<$ 0.05 of 32 were at least 75\% 
+complete MAGs. The majority of these were negatively associated with Crohn's disease, in Figure \ref{fig:Heatmap} 
+we give a heat-map illustrating abundance across samples of the ten most significant clusters and the three with 
+q-value $<$ 0.05 that were positively associated with Crohn's. 
+
 
