@@ -1,9 +1,9 @@
 # metag-rev-sup
 
-#Supplementary materials for Quince et al. Metagenome analysis Review
+# Supplementary materials for Quince et al. Metagenome analysis Review
 
 <a name="assembly"/>
-##Assembly based metagenomics analysis
+## Assembly based metagenomics analysis
 
 This analysis regenerates the results in the left panel of Figure 3. The results will not 
 be identical due to some differences in software principally the switch from idba_ud to megahit
@@ -42,7 +42,7 @@ a collection of different software programs:
 9. [GFF python parser] (https://github.com/chapmanb/bcbb/tree/master/gff)
 
 
-###Co-assembly
+### Co-assembly
 
 Create an example directory to work in:
 ```
@@ -63,7 +63,7 @@ ls Reads/*R2*fasta | tr "\n" "," | sed 's/,$//' > R2.csv
 ```
 Then set assembler running may take several hours...
 ```
-nohup megahit -1 $(<R1.csv) -2 $(<R2.csv) -t 96 -o Assembly --presets meta > megahit.out&
+nohup megahit -1 $(<R1.csv) -2 $(<R2.csv) -t 96 -o Assembly > megahit.out&
 ```
 
 We can have a look at how good the assembly was:
@@ -87,7 +87,7 @@ change as appropriate:
 export CONCOCT=~/Installed/CONCOCT
 ```
 
-###Mapping
+### Mapping
 
 First we cut up contigs and place in new dir:
 
