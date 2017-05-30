@@ -242,7 +242,7 @@ normalised abundances for each cluster. Move into the Concoct directory and usin
 ```
 cd ../Concoct
 tr "\t" "," < Coverage.tsv > Coverage.csv
-$CONCOCT/scripts/ClusterMeanCov.pl --cfile=clustering_gt1000.csv --covfile=Coverage.csv --ffile=../final.contigs_c10K.fa > cluster_freq.csv 
+python $METAG/ClusterMeanCov.py Coverage.csv clustering_gt1000.csv ../contigs/final_contigs_c10K.fa > cluster_freq.csv
 ```
 
 
