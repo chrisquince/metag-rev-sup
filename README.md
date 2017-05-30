@@ -245,10 +245,13 @@ tr "\t" "," < Coverage.tsv > Coverage.csv
 python $METAG/ClusterMeanCov.py Coverage.csv clustering_gt1000.csv ../contigs/final_contigs_c10K.fa > cluster_freq.csv
 ```
 
+An NMDS plot of these abundances are shown in the figure below:
 
-An NMDS plot of these abundances are shown in Figure \ref{fig:NMDS}. From this it is apparent 
-that there are significant differences in community composition between the two types. In fact 10.8\% of the 
-variance in community composition was explained by type (perm. ANOVA, p-value $<$ 0.001). There was also a higher variance in community 
+![NMDS](./Figures/NMDS.pdf)
+
+Figure \ref{fig:NMDS}. From this it is apparent 
+that there are significant differences in community composition between the two types. In fact 11.2% of the 
+variance in community composition was explained by type (perm. ANOVA, p-value = 0.002). There was also a higher variance in community 
 composition in the CD children (Average distance to median: CD 0.5510 vs. Healthy 0.4033 p-value = $8.317e-05$). To determine those clusters 
 responsible for this difference we performed Kruskal-Wallis non-parametric ANOVA on the log-transformed abundances in each group. 
 Benjamini-hochberg was used to correct for multiple comparisons. This revealed 89 clusters with a 
