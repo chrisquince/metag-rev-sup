@@ -185,15 +185,16 @@ We can count the total number of bins as follows:
 ```
 cut -d"," -f2 clustering_gt1000.csv | sort | uniq -c | wc
 ```
-We should give something like 264.
+We should give something like 272.
 
-###Annotate genes on contigs
+### Annotate genes on contigs
 
 First we call genes on the contigs using prodigal.
 ```
+cd ..
 mkdir Annotate
 cd Annotate/
-LengthFilter.pl ../contigs/final_contigs_c10K.fa 1000 > final_contigs_gt1000_c10K.fa
+$METAG/LengthFilter.pl ../contigs/final_contigs_c10K.fa 1000 > final_contigs_gt1000_c10K.fa
 prodigal -i final_contigs_gt1000_c10K.fa -a final_contigs_gt1000_c10K.faa -d final_contigs_gt1000_c10K.fna  -f gff -p meta -o final_contigs_gt1000_c10K.gff
 ```
 
