@@ -72,9 +72,9 @@ contig-stats.pl < Assembly/final.contigs.fa
 ```
 Output should be similar too:
 ```
-sequence #: 1316028	total length: 964326614	max length: 318273	N50: 1088	N90: 299
+sequence #: 863051	total length: 942845899	max length: 490055	N50: 1959	N90: 397
 ```
-Not bad, a N50 of 1088bp. All scripts are available in this repo in the scripts dir. They will 
+Not bad, a N50 of 1959bp. All scripts are available in this repo in the scripts dir. They will 
 need to be added to your path though.
 
 We will now perform CONCOCT binning of these contigs. As explained in 
@@ -82,9 +82,10 @@ We will now perform CONCOCT binning of these contigs. As explained in
 there are good reasons to cut up contigs prior to binning. We will use a script from 
 CONCOCT to do this. For convenience we 
 will create an environmental variables that points to the CONCOCT install directory 
-change as appropriate:
+and the scripts directory of the repo change as appropriate:
 ```
 export CONCOCT=~/Installed/CONCOCT
+export METAG=/mnt/data-chris/chris/Projects/metag-rev-sup/scripts
 ```
 
 ### Mapping
@@ -124,7 +125,7 @@ done
 Then we need to calculate our contig lengths.
 
 ```bash
-python ~/bin/Lengths.py -i contigs/final_contigs_c10K.fa > contigs/final_contigs_c10K.len
+python $METAG/Lengths.py -i contigs/final_contigs_c10K.fa > contigs/final_contigs_c10K.len
 ```
 
 Then we calculate coverages for each contig in each sample:
@@ -159,7 +160,7 @@ and finally run the following perl script to collate the coverages across sample
 from csv to tsv to be compatible with CONCOCT:
 
 ```bash
-Collate.pl Map | tr "," "\t" > Coverage.tsv
+$METAG/Collate.pl Map | tr "," "\t" > Coverage.tsv
 ```
 
 
