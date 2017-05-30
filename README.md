@@ -215,7 +215,7 @@ This script performs an RPS-BLAST of translated
 sequences against the NCBI COG database using an e-value cut-off of 1.0e-3. 
 Each query was assigned to the top RPS-BLAST and only if it covered at least 50% of the target sequence. 
 
-###Evaluate clustering based on SCGs
+### Evaluate clustering based on SCGs
 
 The script COG_table.py was then used to generate a table of counts for 36 COGs that we 
 previously identified as being found in all bacterial genome with a single copy. We refer to these 
@@ -228,10 +228,9 @@ and a pdf:
 ```
 $CONCOCT/scripts/COGPlot.R -s clustering_gt1000_scg.tsv -o clustering_gt1000_scg.pdf
 ```
-This enables us to estimate the completeness of each CONCOCT cluster, in total we found 88 clusters which 
+This enables us to estimate the completeness of each CONCOCT cluster, in total we found 80 clusters which 
 were at least 75% complete and pure in this data set. We will consider these clusters to be 
-partially complete metagenome assembled genomes or MAGs. In total we obtained 54 clusters 
-that were 75% pure and complete.
+partially complete metagenome assembled genomes or MAGs. 
 
 ![Single copy core gene plot](./Figures/clustering_gt1000_scg.pdf)
 
