@@ -3,6 +3,41 @@
 # Supplementary materials for Quince et al. Metagenome analysis Review
 
 <a name="assembly"/>
+
+## Reads for metagenome evaluation
+
+The data sets used in our evaluation are linked below. These 
+were subsampled to 25M paired reads from the original studies:
+
+[Gut sample forward](https://mgexamples.s3.climb.ac.uk/HMP_GUT_SRS052697.25M.1.fastq.gz)
+
+[Gut sample reverse](https://mgexamples.s3.climb.ac.uk/HMP_GUT_SRS052697.25M.2.fastq.gz)
+
+[HMP Mock community forward](https://mgexamples.s3.climb.ac.uk/HMP_MOCK_SRR2726667_8.25M.1.fastq.gz)
+
+[HMP Mock community reverse](https://mgexamples.s3.climb.ac.uk/HMP_MOCK_SRR2726667_8.25M.2.fastq.gz)
+
+[Env Mock community forward](https://mgexamples.s3.climb.ac.uk/MOCK_M63H.25M.1.fastq.gz)
+
+[Env Mock community reverse](https://mgexamples.s3.climb.ac.uk/MOCK_M63H.25M.2.fastq.gz)
+
+[Soil sample forward](https://mgexamples.s3.climb.ac.uk/SOIL_BROWN.25M.1.fastq.gz)
+
+[Soil sample reverse](https://mgexamples.s3.climb.ac.uk/SOIL_BROWN.25M.2.fastq.gz)
+
+[Ocean sample forward]()
+
+[Ocean sample reverse]()
+
+Gut and HMP mock sample: HMP The Human Microbiome Project 
+Consortium. Structure, function and diversity of the healthy human microbiome. Nature 486, 207-214 (2012)
+
+Env mock community: D'Amore, R. et al. A comprehensive benchmarking study of protocols and sequencing platforms for 16S rRNA community profiling. BMC Genomics 17, 55, doi:10.1186/s12864-015-2194-9 (2016)
+
+Ocean sample: Sunagawa S, Coelho LP, Chaffron S, Kultima JR, Labadie K, Salazar G et al. (2015). Ocean plankton. Structure and
+function of the global ocean microbiome. Science 348: 1261359
+
+
 ## Assembly based metagenomics analysis
 
 This analysis regenerates the results in the left panel of Figure 3. The results will not 
