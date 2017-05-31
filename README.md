@@ -256,15 +256,12 @@ sed 's/Map\///g' cluster_freq.csv | sed 's/^/D/' > cluster_freqR.csv
 A copy of this same file is in the Results directory and then source the R commands in the file scripts/NMDS.R.
 From this it is apparent that there are significant differences in community composition between the two types. In fact 11.2% of the 
 variance in community composition was explained by type (perm. ANOVA, p-value = 0.002). 
-There was also a higher variance in community composition in the CD children 
-(Average distance to median: CD 0.5510 vs. Healthy 0.4033 p-value = $0.0002525$). 
+There was also a higher variance in community composition in the CD children (p-value = $0.0002525$). 
 
-To determine those clusters 
-responsible for this difference we performed Kruskal-Wallis non-parametric ANOVA on the log-transformed abundances in each group. 
-Benjamini-hochberg was used to correct for multiple comparisons. This revealed 89 clusters with a 
-q-value $<$ 0.05 of 32 were at least 75\% 
-complete MAGs. The majority of these were negatively associated with Crohn's disease, in Figure \ref{fig:Heatmap} 
-we give a heat-map illustrating abundance across samples of the ten most significant clusters and the three with 
-q-value $<$ 0.05 that were positively associated with Crohn's. 
+To determine those clusters responsible for this difference we performed Kruskal-Wallis non-parametric ANOVA on the 
+log-transformed abundances in each group. 
+Benjamini-hochberg was used to correct for multiple comparisons. 
+This revealed 70 clusters with a q-value < 0.05 of which 26 were at least 75% 
+complete MAGs. The majority of these were negatively associated with Crohn's disease. 
 
 
