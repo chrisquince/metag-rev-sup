@@ -256,7 +256,7 @@ sed 's/Map\///g' cluster_freq.csv | sed 's/^/D/' > cluster_freqR.csv
 A copy of this same file is in the Results directory and then source the R commands in the file scripts/NMDS.R.
 From this it is apparent that there are significant differences in community composition between the two types. In fact 11.2% of the 
 variance in community composition was explained by type (perm. ANOVA, p-value = 0.002). 
-There was also a higher variance in community composition in the CD children (p-value = $0.0002525$). 
+There was also a higher variance in community composition in the CD children (p-value = 0.0002525). 
 
 To determine those clusters responsible for this difference we performed Kruskal-Wallis non-parametric ANOVA on the 
 log-transformed abundances in each group. 
