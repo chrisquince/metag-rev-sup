@@ -21,13 +21,14 @@ were subsampled to 25M paired reads from the original studies:
 
 [Env Mock community reverse](https://mgexamples.s3.climb.ac.uk/MOCK_M63H.25M.2.fastq.gz)
 
-[Soil sample forward](https://mgexamples.s3.climb.ac.uk/SOIL_BROWN.25M.1.fastq.gz)
+[Soil sample forward](https://mgexamples.s3.climb.ac.uk/SOIL_NATCOMM.25M.1.fastq.gz)
 
-[Soil sample reverse](https://mgexamples.s3.climb.ac.uk/SOIL_BROWN.25M.2.fastq.gz)
+[Soil sample reverse](https://mgexamples.s3.climb.ac.uk/SOIL_NATCOMM.25M.2.fastq.gz)
 
-[Ocean sample forward]()
+[Ocean sample forward](https://mgexamples.s3.climb.ac.uk/TARA_OCEAN.25M.1.fastq.gz)
 
-[Ocean sample reverse]()
+[Ocean sample reverse](https://mgexamples.s3.climb.ac.uk/TARA_OCEAN.25M.2.fastq.gz)
+
 
 Gut and HMP mock sample: HMP The Human Microbiome Project 
 Consortium. Structure, function and diversity of the healthy human microbiome. Nature 486, 207-214 (2012)
