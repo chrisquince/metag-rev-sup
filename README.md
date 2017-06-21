@@ -38,6 +38,7 @@ Env mock community: D'Amore, R. et al. A comprehensive benchmarking study of pro
 Ocean sample: Sunagawa S, Coelho LP, Chaffron S, Kultima JR, Labadie K, Salazar G et al. (2015). Ocean plankton. Structure and
 function of the global ocean microbiome. Science 348: 1261359
 
+Ofek-Lalzar, M. et al. Niche and host-associated functional signatures of the root surface microbiome. Nature communications 5, 4950, doi:10.1038/ncomms5950 (2014).
 
 ## Assembly based metagenomics analysis
 
